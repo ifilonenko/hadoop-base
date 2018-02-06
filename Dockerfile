@@ -10,7 +10,7 @@ RUN yum -y install which
 RUN sed -i -e 's/#//' -e 's/default_ccache_name/# default_ccache_name/' /etc/krb5.conf
 RUN useradd -u 1098 hdfs
 
-ADD hadoop-2.6.5.tar.gz /
+ADD hadoop-2.7.3.tar.gz /
 RUN ln -s hadoop-2.6.5 hadoop
 RUN chown -R -L hdfs /hadoop
 
@@ -18,8 +18,11 @@ COPY ssl-server.xml /hadoop/etc/hadoop/
 COPY yarn-site.xml /hadoop/etc/hadoop/
 
 COPY start-namenode.sh /
+COPY start-namenode-unsecure.sh /
 COPY start-datanode.sh /
+COPY start-datenode-unsecure.sh /
 COPY populate-data.sh /
+COPY populate-data-unsecure.sh /
 COPY start-kdc.sh /
 
 COPY wordcount.txt /
